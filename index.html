@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EV Testing</title>
+<meta name="description" content="Various tests and experiments with electric cars">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div>
+    <h1>EV Testing</h1>
+    <p class="lede">Various tests and experiments with electric cars.</p>
+    <p class="byline">
+      <span>JP Loh</span>
+    </p>
+  </div>
+  <button id="theme" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <svg id="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" hidden><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</header>
+
+<div class="section-head">
+  <h2>DC charging curves</h2>
+  <p>Peak power reached, against the figure the manufacturer claims.</p>
+</div>
+
+<div class="grid">
+
+  <a class="card" href="./dc-charging-curve/jaecoo-ej6/">
+    <div class="card-top">
+      <div>
+        <p class="model">Jaecoo EJ6</p>
+        <p class="where">ACMobility Legazpi Carpark</p>
+      </div>
+      <span class="badge ready">Report ready</span>
+    </div>
+
+    <div class="headline">
+      <span class="num">82.4</span><span class="unit">kW peak</span>
+      <span class="claim">103%<br>of claim</span>
+    </div>
+    <div class="meter" role="img" aria-label="Peak power reached 103 percent of the 80 kW claim">
+      <div class="track"><div class="fill" style="width: 85.8%"></div><div class="tick"></div></div>
+      <div class="scale"><span>0</span><span>claimed 80 kW</span></div>
+    </div>
+
+    <dl>
+      <dt>SOC tested</dt><dd>19.7 to 84.1%</dd>
+      <dt>Average power</dt><dd>72.2 kW</dd>
+      <dt>Charger</dt><dd>240 kW</dd>
+      <dt>Battery</dt><dd>69.77 kWh LFP</dd>
+      <dt>Date</dt><dd>29 Dec 2025</dd>
+    </dl>
+
+    <p class="cta">Read the full report
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </p>
+  </a>
+
+  <div class="card censored">
+    <div class="card-top">
+      <div>
+        <p class="model">BYD Tang EV</p>
+        <p class="where">Shell Recharge SLEX Mamplasan NB</p>
+      </div>
+      <span class="badge">Data collected</span>
+    </div>
+
+    <div class="headline">
+      <span class="num">XXXX</span><span class="unit">kW peak</span>
+      <span class="claim">XXX%<br>of claim</span>
+    </div>
+    <div class="meter" role="img" aria-label="Peak power result withheld until the report is published">
+      <div class="track"><div class="fill" style="width: 83.3%"></div><div class="tick"></div></div>
+      <div class="scale"><span>0</span><span>claimed 170 kW</span></div>
+    </div>
+
+    <dl>
+      <dt>SOC tested</dt><dd>XX to XX%</dd>
+      <dt>Average power</dt><dd>XX kW</dd>
+      <dt>Charger</dt><dd>180 kW, shared</dd>
+      <dt>Battery</dt><dd>XXXXXX</dd>
+      <dt>Date</dt><dd style="filter: none;">11 Jun 2026</dd>
+    </dl>
+
+    <p class="pending">Report in progress.</p>
+  </div>
+
+  <div class="card censored">
+    <div class="card-top">
+      <div>
+        <p class="model">GAC Aion V</p>
+        <p class="where">ACMobility Legazpi Carpark</p>
+      </div>
+      <span class="badge">Data collected</span>
+    </div>
+
+    <div class="headline">
+      <span class="num">XXXX</span><span class="unit">kW peak</span>
+      <span class="claim">XXX%<br>of claim</span>
+    </div>
+    <div class="meter" role="img" aria-label="Peak power result withheld until the report is published">
+      <div class="track"><div class="fill" style="width: 43.3%"></div><div class="tick"></div></div>
+      <div class="scale"><span>0</span><span>claimed 180 kW</span></div>
+    </div>
+
+    <dl>
+      <dt>SOC tested</dt><dd>XX to XX</dd>
+      <dt>Average power</dt><dd>XX kW</dd>
+      <dt>Charger</dt><dd>240 kW, shared</dd>
+      <dt>Battery</dt><dd>XXXXXX</dd>
+      <dt>Date</dt><dd style="filter: none;">1 Sep 2026</dd>
+    </dl>
+
+    <p class="pending">Report in progress.</p>
+  </div>
+
+</div>
+<script src="./app.js"></script>
+</body>
+</html>

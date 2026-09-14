@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jaecoo EJ6 DC Charging Curve</title>
+<meta name="description" content="Interactive DC fast-charging curve for the Jaecoo EJ6: power, current, voltage and state of charge over time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div>
+    <h1>Jaecoo EJ6 - DC Charging Curve</h1>
+    <p class="sub">
+      <span>JP Loh / Philippine EV Community</span>
+    </p>
+    <p class="sub">
+      <span>ACMobility Legazpi Carpark</span><span class="dot">·</span><span>29 Dec 2026, 11:46–12:25</span><span class="dot">·</span><span>240 kW charger</span><span class="dot">·</span><span>80 kW claimed max</span>
+    </p>
+  </div>
+  <button class="icon-btn" id="theme" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <svg id="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" hidden><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</header>
+
+<section class="tiles" id="tiles"></section>
+
+<section class="card">
+  <div class="card-head">
+    <div>
+      <h2 class="card-title">Summary and Findings</h2>
+    </div>
+  </div>
+  <div class="card-body two-col" style="padding-left: 20px; padding-right: 20px">
+   <div class="text-col">
+    <p>Well-behaved, and it actually beat its rating slightly. The EJ6 has a flat ~82 kW plateau from 30–50%, taper starting around 55%, down to ~27 kW avg in the 80s. More praise is deserved with hardly a curve observable at 88% flatness, better than plenty of EVs as well as a more predictable C-rating.</p>
+    <p>The chart's plateau reads as an 82 kW bar from about 25% to 57%, then three clean step-downs: to ~74 kW at 57%, ~67 kW at 68%, and ~44 kW at 75%, before the final taper. Those are discrete BMS steps, not a smooth thermal roll-off, which is the signature of a current-limit table rather than a temperature-driven derate.</p>
+    <p>Based on this test, it is recommended on long distance motoring to plan charging up to 79% to maximize the charging speed. Any higher SOC and the charging rate is halved when compared to SOC below 57%. below 55% you get 5% every 2.6 minutes; by 75–80% that's 3.7 minutes; past 80% it roughly doubles.</p>
+    <p>There is an estimated 2.42 kWh unaccounted between the charger's meter and the logged data. Resistive heating in the cells, thermal management, air conditioning and 12V loads could be attributed to that. A 94.9% charging efficiency is in the normal range.</p>
+    <p>Outside of the charging curve test, there is a power limit to 70 kW when driving below 15% SOC (the EJ6 has dual motors with a combined 205 kW power rating). There may be no lower speed limit enforced but the limited power draw would be noticed in steep ascents with a full load.</p>
+    <p>It is unknown if there will be temperature-driven derating when the battery temperature is critical or if a session will simply halt. Another test could back up the current-limit table that's suspected.</p>
+   </div>
+   <div class="photo-col">
+      <figure>
+        <img src="./collage.jpg" alt="Charger display showing elapsed time">
+        <figcaption>Documentation of the charging curve test at Legazpi Carpark, Makati City</figcaption>
+      </figure>
+   </div>
+  </div>
+</section>
+
+<section class="card" style="margin-top: 20px;">
+  <div class="card-head">
+    <div>
+      <h2 class="card-title">Session trace</h2>
+      <p class="card-desc">Each measure on its own axis, sharing one timeline.</p>
+    </div>
+    <div class="controls">
+      <button id="reset">Reset zoom</button>
+      <button id="toggletable" aria-pressed="false">Table</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="controls" style="padding: 8px 8px 4px;" id="legend"></div>
+    <svg id="chart" role="img" aria-label="Charging curve: power, current, voltage and state of charge over time"></svg>
+    <p class="hint">Drag across the chart to zoom into a time range · double-click to reset · hover for values</p>
+  </div>
+</section>
+
+<section class="card" style="margin-top: 20px;">
+  <div class="card-head">
+    <div>
+      <h2 class="card-title">Charging power vs. state of charge</h2>
+      <p class="card-desc">The comparable view: power drawn at each SOC, independent of how long the session ran.</p>
+    </div>
+  </div>
+  <div class="card-body">
+    <svg id="soc-chart" role="img" aria-label="Charging power plotted against state of charge"></svg>
+    <p class="hint">Hover for values at any state of charge</p>
+  </div>
+</section>
+
+<div id="tablewrap" hidden></div>
+
+</div>
+<div id="tip" role="status" aria-live="off"></div>
+
+<script src="./app.js"></script>
+</body>
+</html>
