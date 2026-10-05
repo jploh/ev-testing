@@ -9,26 +9,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
-<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="../../styles.css">
+<script src="../../header.js"></script>
 </head>
 <body>
 <div class="wrap">
 
-<header>
-  <div>
-    <h1>Jaecoo EJ6 - DC Charging Curve</h1>
-    <p class="sub">
-      <span>JP Loh / Philippine EV Community</span>
-    </p>
-    <p class="sub">
-      <span>ACMobility Legazpi Carpark</span><span class="dot">·</span><span>29 Dec 2025, 11:46–12:25</span><span class="dot">·</span><span>240 kW charger</span><span class="dot">·</span><span>80 kW claimed max</span>
-    </p>
-  </div>
-  <button class="icon-btn" id="theme" aria-label="Toggle dark mode" title="Toggle dark mode">
-    <svg id="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-    <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" hidden><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-  </button>
-</header>
+<site-header compact crumbs="DC charging curves @ #dc-charging-curves | Jaecoo EJ6">
+  <h1>Jaecoo EJ6 - DC Charging Curve</h1>
+  <p class="sub">
+    <span>JP Loh / Philippine EV Community</span>
+  </p>
+  <p class="sub">
+    <span>ACMobility Legazpi Carpark</span><span class="dot">·</span><span>29 Dec 2025, 11:46–12:25</span><span class="dot">·</span><span>240 kW charger</span><span class="dot">·</span><span>80 kW claimed max</span>
+  </p>
+</site-header>
 
 <section class="tiles" id="tiles"></section>
 
@@ -93,5 +88,8 @@
 <div id="tip" role="status" aria-live="off"></div>
 
 <script src="./app.js"></script>
+<!-- Cloudflare Web Analytics -->
+ <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1b5160ae69d342719ec05895a3b62908"}'></script>
+ <!-- End Cloudflare Web Analytics -->
 </body>
 </html>

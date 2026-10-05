@@ -138,24 +138,10 @@ d3.select('#legend').selectAll('button').data(SERIES).join('button')
     render();
   });
 
-/* ---------------- theme + table ---------------- */
+/* ---------------- controls + table ---------------- */
 d3.select('#reset').on('click', () => { state.domain = null; render(); });
 
 const root = document.documentElement;
-function applyTheme(t) {
-  root.setAttribute('data-theme', t);
-  document.getElementById('ico-sun').hidden = t === 'dark';
-  document.getElementById('ico-moon').hidden = t !== 'dark';
-  try { localStorage.setItem('ej6-theme', t); } catch (e) {}
-}
-(function initTheme() {
-  let t = null;
-  try { t = localStorage.getItem('ej6-theme'); } catch (e) {}
-  if (!t) t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  applyTheme(t);
-})();
-document.getElementById('theme').addEventListener('click', () =>
-  applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
 
 d3.select('#toggletable').on('click', function () {
   const showing = d3.select('#tablewrap').property('hidden');

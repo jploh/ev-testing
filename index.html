@@ -9,25 +9,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./styles.css">
+<script src="./header.js"></script>
 </head>
 <body>
 <div class="wrap">
 
-<header>
-  <div>
-    <h1>EV Testing</h1>
-    <p class="lede">Various tests and experiments with electric cars.</p>
-    <p class="byline">
-      <span>JP Loh</span>
-    </p>
-  </div>
-  <button id="theme" aria-label="Toggle dark mode" title="Toggle dark mode">
-    <svg id="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-    <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" hidden><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-  </button>
-</header>
+<site-header>
+  <h1>EV Testing</h1>
+  <p class="lede">Various tests and experiments with electric cars.</p>
+  <p class="byline">
+    <span>JP Loh</span>
+  </p>
+</site-header>
 
-<div class="section-head">
+<div class="section-head" id="dc-charging-curves">
   <h2>DC charging curves</h2>
   <p>Peak power reached, against the figure the manufacturer claims.</p>
 </div>
@@ -124,6 +119,8 @@
   </div>
 
 </div>
-<script src="./app.js"></script>
+<!-- Cloudflare Web Analytics -->
+ <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1b5160ae69d342719ec05895a3b62908"}'></script>
+ <!-- End Cloudflare Web Analytics -->
 </body>
 </html>
