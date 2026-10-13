@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BYD Tang EV DC Charging Curve</title>
+<meta name="description" content="Interactive DC fast-charging curve for the BYD Tang EV: power, state of charge, current, voltage and pack temperature over a full charge to 100%.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<link rel="stylesheet" href="../../styles.css">
+<script src="../../header.js"></script>
+</head>
+<body>
+<div class="wrap">
+
+<site-header compact crumbs="DC charging curves @ #dc-charging-curves | BYD Tang EV">
+  <h1>BYD Tang EV - DC Charging Curve</h1>
+  <p class="sub">
+    <span>JP Loh / Philippine EV Community</span>
+  </p>
+  <p class="sub">
+    <span>Shell Recharge SLEX Mamplasan NB</span><span class="dot">·</span><span>11 Jun 2026, 15:56–17:13</span><span class="dot">·</span><span>180 kW charger</span><span class="dot">·</span><span>170 kW claimed max</span>
+  </p>
+</site-header>
+
+<section class="tiles" id="tiles"></section>
+
+<section class="card">
+  <div class="card-head">
+    <div>
+      <h2 class="card-title">Summary and Findings</h2>
+    </div>
+  </div>
+  <div class="card-body two-col" style="padding-left: 20px; padding-right: 20px">
+   <div class="text-col">
+    <p>The Tang hits its number. Peak power reached 170.5 kW against a 170 kW claim, landing within half a percent of the figure on the brochure. From the 20 to 80% window the Tang takes 48.4 minutes.</p>
+    <p>Unlike the Jaecoo EJ6, the test shows a curve unlike of a clean current-limit table. Pack temperature climbed from 34 to 49&deg; C across the session, and the power steps track that rise rather than tracking SOC alone.</p>
+    <p>The peak C-rate of 1.57C is higher than the EJ6's at 1.18C but the average C-rate from 20 to 80% would be the more significant figure in a typical real-world scenario.</p>
+    <p>The charger was shared during this session with a BYD Seagull, followed by a Kia EV6. The Tang still reached its full claimed power before the Seagull started charging but appears to have only affected the test 4 minutes into the session until the temperature reached 48&deg; C and the current derate was applied. The EV6 did not affect the test as the data remained consistent when the EV6 started.</p>
+    <p>The average charging rate from 20 to 80% is 88.4 kW, achieving a 12.5 kW advantage over the EJ6. Despite this, the Tang would finish behind on a race to recharge from 20 to 80% due to the size of the battery pack.</p>
+    <p>Overall, it is good for the Tang to reach its claimed maximum charging speed and the charging time is reasonable for a pack this large. The charging rate is likely driven by temperature which is better than a <nobr>current-limit</nobr> table when the conditions support it. It's possible that the Tang could have better results with a lower starting temperature or far lower ambient temperature. Further testing with different conditions would provide more clarity.</p>
+  </div>
+  <div class="photo-col">
+    <figure>
+      <img src="./collage.jpg" alt="Charging the Tang EV">
+      <figcaption>Charging the Tang EV at Shell SLEX Mamplasan, Bi&ntilde;an City</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="card" style="margin-top: 20px;">
+  <div class="card-head">
+    <div>
+      <h2 class="card-title">Session trace</h2>
+      <p class="card-desc">Each measure on its own axis, sharing one timeline.</p>
+    </div>
+    <div class="controls">
+      <button id="reset">Reset zoom</button>
+      <button id="toggletable" aria-pressed="false">Table</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="controls" style="padding: 8px 8px 4px;" id="legend"></div>
+    <svg id="chart" role="img" aria-label="Charging curve: power, state of charge, current, voltage and pack temperature over time"></svg>
+    <p class="hint">Drag across the chart to zoom into a time range · double-click to reset · hover for values</p>
+  </div>
+</section>
+
+<section class="card" style="margin-top: 20px;">
+  <div class="card-head">
+    <div>
+      <h2 class="card-title">Charging power vs. state of charge</h2>
+      <p class="card-desc">The comparable view: power drawn at each SOC, independent of how long the session ran.</p>
+    </div>
+  </div>
+  <div class="card-body">
+    <svg id="soc-chart" role="img" aria-label="Charging power plotted against state of charge"></svg>
+    <p class="hint">Hover for values at any state of charge</p>
+  </div>
+</section>
+
+<div id="tablewrap" hidden></div>
+
+</div>
+<div id="tip" role="status" aria-live="off"></div>
+
+<script src="./app.js"></script>
+<!-- Cloudflare Web Analytics -->
+ <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1b5160ae69d342719ec05895a3b62908"}'></script>
+ <!-- End Cloudflare Web Analytics -->
+</body>
+</html>

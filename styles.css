@@ -15,12 +15,14 @@
   --radius: 0.625rem;
   --accent-blue: #2a78d6;
   --track: #ececef;
+  --meter-over: #008300;
   --grid: #ececef;
   /* validated categorical slots: blue / yellow / magenta / green */
   --series-kw:  #2a78d6;
   --series-a:   #eda100;
   --series-v:   #e87ba4;
   --series-soc: #008300;
+  --series-temp: #4a3aa7;
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
@@ -35,11 +37,13 @@
   --ring: #52525b;
   --accent-blue: #3987e5;
   --track: #232327;
+  --meter-over: #19a319;
   --grid: #1f1f23;
   --series-kw:  #3987e5;
   --series-a:   #c98500;
   --series-v:   #d55181;
   --series-soc: #008300;
+  --series-temp: #9085e9;
 }
 
 * { box-sizing: border-box; }
@@ -130,10 +134,24 @@ a.card:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 .headline .claim { font-size: 12.5px; color: var(--muted-foreground); margin-left: auto; text-align: right; }
 
 /* peak power as a share of the manufacturer's claim; track spans 0-120% */
-.meter { margin-top: 10px; }
+/* Each card sets --pct (its peak as a share of that car's claim). The track ends
+   at 100% of the claim, so a car that fell short simply leaves the bar unfilled.
+   Only a car that beat its claim stretches its own scale past 100 to make room
+   for the overshoot, which is drawn in green past the tick. Each card scales
+   independently, so no card gives up space for an overshoot it does not have. */
+.meter { --pct: 0; --top: max(100, var(--pct)); margin-top: 10px; }
 .meter .track { position: relative; height: 7px; border-radius: 999px; background: var(--track); overflow: hidden; }
-.meter .fill { position: absolute; inset: 0 auto 0 0; border-radius: 999px; background: var(--accent-blue); }
-.meter .tick { position: absolute; top: -3px; bottom: -3px; left: 83.333%; width: 1px; background: var(--muted-foreground); opacity: .55; }
+.meter .fill { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 999px; background: var(--accent-blue);
+  width: calc(var(--pct) / var(--top) * 100%); }
+/* Sits on top of the tail of .fill, so the bar reads as one length that simply
+   changes colour past the claim. Square edges; the track rounds the outer end. */
+.meter .over { position: absolute; top: 0; bottom: 0; background: var(--meter-over);
+  left: calc(100 / var(--top) * 100%);
+  width: calc(max(var(--pct) - 100, 0) / var(--top) * 100%); }
+/* At or below the claim the tick lands on the track's own right edge, where the
+   "claimed N kW" label already marks it, so it is clipped away unseen. */
+.meter .tick { position: absolute; top: -3px; bottom: -3px; width: 1px; background: var(--muted-foreground); opacity: .55;
+  left: calc(100 / var(--top) * 100%); }
 .meter .scale { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted-foreground); margin-top: 5px; }
 
 dl { margin: 18px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 7px 16px; font-size: 13px; }
@@ -156,6 +174,7 @@ dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
 }
 /* a blurred bar still shows its length, so the meter is hatched out instead */
 .card.censored .meter .fill,
+.card.censored .meter .over,
 .card.censored .meter .tick { display: none; }
 .card.censored .meter .track {
   background: repeating-linear-gradient(
